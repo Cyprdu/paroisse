@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Photos la Salette</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        /* Style pour le bouton retour */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        /* Style pour le mode plein écran */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal img {
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* Cette propriété évite la déformation de l'image */
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            padding: 16px;
+            font-size: 24px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" onclick="window.history.back()">&#8592; Retour</button>
+
+    <div class="container">
+        <h1>Photos la Salette</h1>
+        <div class="gallery">
+            <img src="aumoneriephoto.jpeg" alt="Photo 1">
+            <img src="groupe.jpeg" alt="Photo 2">
+            <img src="contact.jpg" alt="Photo 3">
+            <img src="photo.jpg" alt="Photo 4">
+            <img src="20241024_092601293_iOS.JPG" alt="Photo 16">
+            <img src="20241024_092929966_iOS.JPG" alt="Photo 17">
+            <img src="20241024_092944924_iOS.JPG" alt="Photo 18">
+        </div>
+    </div>
+
+    <!-- Modal pour afficher les images en plein écran -->
+    <div class="modal" id="modal">
+        <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+        <img class="modal-content" id="modalImage">
+        <span class="next" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.gallery img');
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modalImage');
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentIndex = index;
+                modal.style.display = "block";
+                modalImage.src = img.src;
+            });
+        });
+
+        function changeImage(direction) {
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            modalImage.src = images[currentIndex].src;
+        }
+
+        // Fermer le modal lorsque l'on clique en dehors de l'image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>
