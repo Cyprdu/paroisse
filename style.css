@@ -2280,7 +2280,7 @@ html {
   
   .c-nav_logo-img {
     max-width: none;
-    height: 2.9em;
+    height: 2.5em;
   }
   
   .c-nav_button {
@@ -6690,7 +6690,7 @@ html {
     }
   
     .c-sermon {
-      background-image: url("https://cdn.prod.website-files.com/5f18149f5b6c2b7cabf107a4/5f43d8192c76d4f51d314745_5f43b1313319025f9058b702_1000X_REGIEVIDEO.png"), linear-gradient(to top, #0f0e17c4, #0f0e17b0 31%, #0f0e1700 86%);
+      background-image: url("groupe.jpeg"), linear-gradient(to top, #0f0e17c4, #0f0e17b0 31%, #0f0e1700 86%);
       background-position: 50%, 0 0;
       background-size: cover, auto;
       min-height: 100vw;
